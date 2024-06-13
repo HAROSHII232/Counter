@@ -1,24 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import { Button } from "./components/Button";
+import { CounterDisplay } from "./components/CounterDisplay";
+import { MaxValueDisplay } from "./components/MaxValueDisplay";
+import { ProgressBar } from "./components/ProgressBar";
 
 function App() {
+  const minCount = 0;
+  const getRandomValue = () => Math.ceil(Math.random() * 10);
+  const getProgressBarPercentage = (step: number, maxValue: number) =>
+    (step / maxValue) * 100;
+
+  const [counter, setCounter] = useState(minCount);
+  const [maxValue, setMaxValue] = useState(getRandomValue);
+  const [progress, setProgress] = useState(0);
+
+  const incrementCounter = () => {
+    let count = counter;
+    count++;
+    setCounter(count);
+    setProgress(getProgressBarPercentage(count, maxValue));
+  };
+  const resetCounter = () => {
+    setMaxValue(getRandomValue);
+    setCounter(minCount);
+    setProgress(0);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MaxValueDisplay maxValue={maxValue} />
+      <CounterDisplay counter={counter} maxValue={maxValue} />
+      <ProgressBar progress={progress} />
+      <Button
+        title={"Inc"}
+        onClick={incrementCounter}
+        isDisabled={counter >= maxValue}
+      />
+      <Button
+        title={"Reset"}
+        onClick={resetCounter}
+        isDisabled={counter === minCount}
+      />
     </div>
   );
 }
