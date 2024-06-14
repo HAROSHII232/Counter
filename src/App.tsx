@@ -16,10 +16,8 @@ function App() {
   const [progress, setProgress] = useState(0);
 
   const incrementCounter = () => {
-    let count = counter;
-    count++;
-    setCounter(count);
-    setProgress(getProgressBarPercentage(count, maxValue));
+    setCounter(counter + 1);
+    setProgress(getProgressBarPercentage(counter + 1, maxValue));
   };
   const resetCounter = () => {
     setMaxValue(getRandomValue);
