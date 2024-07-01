@@ -1,3 +1,7 @@
+:root {
+  --accent-color: rgb(133, 239, 239);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,6 +13,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: darkslategray;
 }
 
 code {

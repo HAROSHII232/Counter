@@ -4,6 +4,8 @@ type Props = {
 };
 export const CounterDisplay = ({ counter, maxValue }: Props) => {
   return (
-    <span className={counter === maxValue ? "red-count" : ""}>{counter}</span>
+    <div className="counter-display">
+      <span className={counter === maxValue ? "red-count" : ""}>{counter}</span>
+    </div>
   );
 };

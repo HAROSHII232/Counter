@@ -1,44 +1,33 @@
 import { useState } from "react";
 import "./App.css";
-import { Button } from "./components/Button";
-import { CounterDisplay } from "./components/CounterDisplay";
-import { MaxValueDisplay } from "./components/MaxValueDisplay";
-import { ProgressBar } from "./components/ProgressBar";
+import { Counter } from "./components/counter/Counter";
+import { CounterSettings } from "./components/counterSettings/CounterSettings";
 
 function App() {
-  const minCount = 0;
-  const getRandomValue = () => Math.ceil(Math.random() * 10);
-  const getProgressBarPercentage = (step: number, maxValue: number) =>
-    (step / maxValue) * 100;
+  const startValue = 0;
+  const startMaxValue = 5;
 
-  const [counter, setCounter] = useState(minCount);
-  const [maxValue, setMaxValue] = useState(getRandomValue);
-  const [progress, setProgress] = useState(0);
+  const [counter, setCounter] = useState(startValue);
+  const [maxValue, setMaxValue] = useState(startMaxValue);
 
   const incrementCounter = () => {
     setCounter(counter + 1);
-    setProgress(getProgressBarPercentage(counter + 1, maxValue));
   };
+
   const resetCounter = () => {
-    setMaxValue(getRandomValue);
-    setCounter(minCount);
-    setProgress(0);
+    setCounter(startValue);
   };
 
   return (
     <div className="App">
-      <MaxValueDisplay maxValue={maxValue} />
-      <CounterDisplay counter={counter} maxValue={maxValue} />
-      <ProgressBar progress={progress} />
-      <Button
-        title={"Inc"}
-        onClick={incrementCounter}
-        isDisabled={counter >= maxValue}
-      />
-      <Button
-        title={"Reset"}
-        onClick={resetCounter}
-        isDisabled={counter === minCount}
+      <CounterSettings maxValue={maxValue} startValue={startValue} />
+
+      <Counter
+        counter={counter}
+        maxValue={maxValue}
+        startValue={startValue}
+        incrementCounter={incrementCounter}
+        resetCounter={resetCounter}
       />
     </div>
   );
