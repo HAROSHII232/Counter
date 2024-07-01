@@ -1,12 +1,12 @@
 type Props = {
   title: string;
-  value: number;
-  callback: () => void;
+  value: string;
+  callback: (value: any) => void;
 };
 export const SettingField = ({ title, value, callback }: Props) => {
   return (
     <div className="setting-display__field">
-      <span>{title}</span>
+      <label>{title}</label>
       <input value={value} type="number" onChange={callback} />
     </div>
   );

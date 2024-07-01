@@ -4,11 +4,11 @@ import { Counter } from "./components/counter/Counter";
 import { CounterSettings } from "./components/counterSettings/CounterSettings";
 
 function App() {
-  const startValue = 0;
-  const startMaxValue = 5;
-
-  const [counter, setCounter] = useState(startValue);
-  const [maxValue, setMaxValue] = useState(startMaxValue);
+  const [counter, setCounter] = useState(0);
+  const [maxValue, setMaxValue] = useState(5);
+  const [startValue, setStartValue] = useState(0);
+  const [inputMaxValue, setInputMaxValue] = useState("");
+  const [inputStartValue, setInputStartValue] = useState("");
 
   const incrementCounter = () => {
     setCounter(counter + 1);
@@ -18,9 +18,24 @@ function App() {
     setCounter(startValue);
   };
 
+  const applySettings = () => {
+    const maxVal = parseFloat(inputMaxValue);
+    const startVal = parseFloat(inputStartValue);
+
+    setMaxValue(maxVal);
+    setStartValue(startVal);
+    setCounter(startVal);
+  };
+
   return (
     <div className="App">
-      <CounterSettings maxValue={maxValue} startValue={startValue} />
+      <CounterSettings
+        maxValue={inputMaxValue}
+        startValue={inputStartValue}
+        applySettings={applySettings}
+        setInputMaxValue={setInputMaxValue}
+        setInputStartValue={setInputStartValue}
+      />
 
       <Counter
         counter={counter}
